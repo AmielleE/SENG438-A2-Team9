@@ -1,13 +1,13 @@
 **SENG 438 - Software Testing, Reliability, and Quality**
 
 **Lab. Report \#2 – Requirements-Based Test Generation**
-
-| Group \#:      |     |
-| -------------- | --- |
-| Student Names: |     |
-|                |     |
-|                |     |
-|                |     |
+| Group: 9      |
+|-----------------|
+| Amielle El Makhzoumi |   
+| Fatma Alzubaidi      |   
+| Josral Frederick     |   
+| Faris Janjua         |   
+| Erioluwa Olubadejo   |  
 
 # 1 Introduction
 
@@ -24,7 +24,53 @@ Text…
 // write down the name of the test methods and classes. Organize the based on
 the source code method // they test. identify which tests cover which partitions
 you have explained in the test strategy section //above
+# Range Test.java
+# 1.getCentralValue(): boolean
+     - Test Case: TC_GETCENTRALVALUE_01
+     - Method: getCentralValue()
+     - Partition: Normal symmetric range [-1, 1]
+     - Expected: Central value should be 0
+     - Result: Passed
+# 2. contains(double): boolean
+1. Test Case: testContains_ValueInsideRange_ReturnsTrue
+Method: contains(double value)
+Partition: Value inside range (excluding boundaries)
+Expected: Should return true
+Result: Passed
 
+Significance: Tests the normal, non-boundary case (Equivalence Class 3)
+
+2. Test Case: testContains_ValueAtLowerBound_ReturnsTrue
+Method: contains(double value)
+Partition: Value at lower boundary (inclusive)
+Expected: Should return true
+Result: Passed
+
+Significance: Tests lower boundary inclusion (Equivalence Class 2, Boundary Value Analysis)
+
+3. Test Case: testContains_ValueAtUpperBound_ReturnsTrue
+Method: contains(double value)
+Partition: Value at upper boundary (inclusive)
+Expected: Should return true
+Result: Passed
+Significance: Tests upper boundary inclusion (Equivalence Class 4, Boundary Value Analysis)
+
+4. Test Case: testContains_ValueBelowLowerBound_ReturnsFalse
+Method: contains(double value)
+Partition: Value below lower bound
+Expected: Should return false
+Result: Passed
+
+Significance: Tests values below the valid range (Equivalence Class 1)
+
+5. Test Case: testContains_ValueAboveUpperBound_ReturnsFalse
+Method: contains(double value)
+Partition: Value above upper bound
+Expected: Should return false
+Result: Passed
+
+Significance: Tests values above the valid range (Equivalence Class 5)
+# 3. 
 # 4 How the team work/effort was divided and managed
 
 Text…
