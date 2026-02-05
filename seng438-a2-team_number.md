@@ -70,7 +70,24 @@ Expected: Should return false
 Result: Passed
 
 Significance: Tests values above the valid range (Equivalence Class 5)
-# 3. 
+# 3. getLowerBound(): double
+Test Case: getLowerBound_ShouldReturnCorrectValue()
+method: getlowerBoud()
+Partition: lower bound value
+Expected: -1
+Result: PASSED
+# 4. getUpperBound(): double
+Test Case: getUpperBound_ShouldReturnCorrectValue()
+method: getUpperBound()
+Partition: upper bound value
+Expected: 1
+Result: DID NOT PASS
+# 5.getLength(): double
+Test Case: getLength_ShouldReturnCorrectValue()
+method: getLength()
+partition: upper bound - lower bound
+Expected: 2
+Result: PASSED
 # 4 How the team work/effort was divided and managed
 
 Text…
