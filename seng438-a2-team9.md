@@ -88,7 +88,117 @@ Significance: Tests values above the valid range (Equivalence Class 5)
 - partition: upper bound - lower bound
 - Expected: 2
 - Result: PASSED
-## 4 How the team work/effort was divided and managed
+
+# DataUtilitiesTest.java
+## 1. calculateColumnTotal(Values2D data, int column)
+
+### Test Case: testCalculateColumnTotal_TwoRows_ShouldSumValues
+
+- Method: calculateColumnTotal(Values2D, int)
+- Partition: Valid data object, valid column index, multiple rows
+- Input:
+  - Row count = 2
+  - Values: (0,0) = 7.5, (1,0) = 2.5
+- Expected Output: 10.0
+- Result: Passed
+
+Significance:
+Tests the normal equivalence class where all inputs are valid and values are summed correctly.
+
+---
+
+### Test Case: testCalculateColumnTotal_NullData_ShouldThrowException
+
+- Method: calculateColumnTotal(Values2D, int)
+- Partition: Null input
+- Input: data = null
+- Expected Output: IllegalArgumentException
+- Result: Passed
+
+Significance:
+Tests invalid input partition and verifies proper exception handling.
+
+---
+
+## 2. calculateColumnTotal(Values2D data, int column, int[] validRows)
+
+### Test Case: testCalculateColumnTotal_WithValidRows_ShouldSumSelectedRows
+
+- Method: calculateColumnTotal(Values2D, int, int[])
+- Partition: Valid data, valid column, subset of rows
+- Input:
+  - Row count = 3
+  - validRows = {0, 2}
+  - Values: (0,0) = 4.0, (2,0) = 6.0
+- Expected Output: 10.0
+- Result: Passed
+
+Significance:
+Tests correct summation when only selected rows are considered.
+
+---
+
+## 3. calculateRowTotal(Values2D data, int row)
+
+### Test Case: testCalculateRowTotal_TwoColumns_ShouldSumValues
+
+- Method: calculateRowTotal(Values2D, int)
+- Partition: Valid row index, multiple columns
+- Input:
+  - Column count = 2
+  - Values: (0,0) = 3.0, (0,1) = 4.0
+- Expected Output: 7.0
+- Result: Passed
+
+Significance:
+Tests the normal case where values across columns in a valid row are summed correctly.
+
+---
+
+## 4. createNumberArray(double[] data)
+
+### Test Case: testCreateNumberArray_ValidInput_ShouldReturnNumberArray
+
+- Method: createNumberArray(double[])
+- Partition: Valid numeric array
+- Input: {1.0, 2.5, 3.0}
+- Expected Output: Number[] {1.0, 2.5, 3.0}
+- Result: Passed
+
+Significance:
+Tests the normal equivalence class for valid numeric input.
+
+---
+
+### Test Case: testCreateNumberArray_NullInput_ShouldThrowException
+
+- Method: createNumberArray(double[])
+- Partition: Null input
+- Input: null
+- Expected Output: IllegalArgumentException
+- Result: Passed
+
+Significance:
+Tests boundary case for invalid (null) input.
+
+---
+
+## 5. createNumberArray2D(double[][] data)
+
+### Test Case: testCreateNumberArray2D_Valid2DInput_ShouldReturn2DNumberArray
+
+- Method: createNumberArray2D(double[][])
+- Partition: Valid two-dimensional numeric array
+- Input:
+  {{1.0, 2.0},
+   {3.0, 4.0}}
+- Expected Output: Number[][] equivalent of input
+- Result: Passed
+
+Significance:
+Tests correct conversion of a valid 2D array into a 2D Number array.
+
+# 4 How the team work/effort was divided and managed
 
 Text…
 
