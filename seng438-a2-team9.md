@@ -90,7 +90,7 @@ Significance: Tests values above the valid range (Equivalence Class 5)
 - Result: PASSED
 
 
-6. combine(Range range1, Range range2): Range
+## 6. combine(Range range1, Range range2): Range
 ##1. Test Case: combine_TwoNonNullRanges_ShouldReturnMinLowerMaxUpper
 -Method: combine(Range, Range)
 -Partition: Two valid non-null overlapping ranges
@@ -127,7 +127,7 @@ Significance: Tests null handling partition for second parameter.
 
 Significance: Tests boundary case when both parameters are null.
 
-7. constrain(double value): double
+## 7. constrain(double value): double
 ##1. Test Case: constrain_ValueInsideRange_ShouldReturnSameValue  
 - Method: constrain(double value)  
 - Partition: Value inside range  
@@ -155,7 +155,7 @@ Significance: Tests below range partition and boundary clamping to lower bound.
 
 Significance: Tests above range partition and boundary clamping to upper bound.
 
-8. equals(Object obj): boolean
+## 8. equals(Object obj): boolean
 ##1. Test Case: equals_SameBounds_ShouldReturnTrue  
 - Method: equals(Object obj)  
 - Partition: Two Range objects with same bounds  
@@ -183,7 +183,7 @@ Significance: Tests inequality equivalence class.
 
 Significance: Tests robustness partition for invalid comparisons.
 
-9. expand(Range range, double lowerMargin, double upperMargin): Range
+## 9. expand(Range range, double lowerMargin, double upperMargin): Range
 ##1. Test Case: expand_PositiveMargins_ShouldExpandBothSides  
 - Method: expand(Range range, double lowerMargin, double upperMargin)  
 - Partition: Valid range with positive margins  
@@ -202,7 +202,7 @@ Significance: Tests margin based expansion using normal valid partitions.
 
 Significance: Tests boundary case where margins shouldnt cause change.
 
-10. expandToInclude(Range range, double value): Range
+## 10. expandToInclude(Range range, double value): Range
 
 ##1. Test Case: expandToInclude_NullRange_ShouldCreateSinglePointRange  
 - Method: expandToInclude(Range range, double value)  
