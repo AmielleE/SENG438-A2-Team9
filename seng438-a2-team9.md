@@ -91,24 +91,24 @@ Significance: Tests values above the valid range (Equivalence Class 5)
 
 
 ## 6. combine(Range range1, Range range2): Range
-##1. Test Case: combine_TwoNonNullRanges_ShouldReturnMinLowerMaxUpper
+
+1. Test Case: combine_TwoNonNullRanges_ShouldReturnMinLowerMaxUpper
 -Method: combine(Range, Range)
--Partition: Two valid non-null overlapping ranges
+-Partition: Two valid non null overlapping ranges
 -Input: range1 = [0,5], range2 = [3,10]
 -Expected: Combined range should be [0,10]
 -Result: DID NOT PASS
 
 Significance: Tests normal valid input partition; reveals defect (exception/incorrect bounds) for valid overlapping ranges.
 
-##2.Test Case: combine_FirstNull_ShouldReturnSecond
+2. Test Case: combine_FirstNull_ShouldReturnSecond
 -Method: combine(Range, Range)
 -Partition: First range is null
 -Input: range1 = null, range2 = [1,2]
 -Expected: Should return [1,2]
 -Result: DID NOT PASS
 
-
-##3.Significance: Tests null handling partition for first parameter.
+3.Significance: Tests null handling partition for first parameter.
 
 Test Case: combine_SecondNull_ShouldReturnFirst
 -Method: combine(Range, Range)
@@ -118,7 +118,8 @@ Test Case: combine_SecondNull_ShouldReturnFirst
 -Result: DID NOT PASS
 
 Significance: Tests null handling partition for second parameter.
-##4.Test Case: combine_BothNull_ShouldReturnNull
+
+4.Test Case: combine_BothNull_ShouldReturnNull
 -Method: combine(Range, Range)
 -Partition: Both inputs null
 -Input: range1 = null, range2 = null
@@ -128,7 +129,8 @@ Significance: Tests null handling partition for second parameter.
 Significance: Tests boundary case when both parameters are null.
 
 ## 7. constrain(double value): double
-##1. Test Case: constrain_ValueInsideRange_ShouldReturnSameValue  
+
+1. Test Case: constrain_ValueInsideRange_ShouldReturnSameValue  
 - Method: constrain(double value)  
 - Partition: Value inside range  
 - Input: Range[-1, 1], value = 0.25  
@@ -137,7 +139,7 @@ Significance: Tests boundary case when both parameters are null.
 
 Significance: Tests inside range equivalence class (value unchanged).
 
-##2. Test Case: constrain_ValueBelowLower_ShouldReturnLowerBound  
+2. Test Case: constrain_ValueBelowLower_ShouldReturnLowerBound  
 - Method: constrain(double value)  
 - Partition: Value below lower bound  
 - Input: Range[-1, 1], value = -5  
@@ -146,7 +148,7 @@ Significance: Tests inside range equivalence class (value unchanged).
 
 Significance: Tests below range partition and boundary clamping to lower bound.
 
-##3. Test Case: constrain_ValueAboveUpper_ShouldReturnUpperBound  
+3. Test Case: constrain_ValueAboveUpper_ShouldReturnUpperBound  
 - Method: constrain(double value)  
 - Partition: Value above upper bound  
 - Input: Range[-1, 1], value = 5  
@@ -156,7 +158,8 @@ Significance: Tests below range partition and boundary clamping to lower bound.
 Significance: Tests above range partition and boundary clamping to upper bound.
 
 ## 8. equals(Object obj): boolean
-##1. Test Case: equals_SameBounds_ShouldReturnTrue  
+
+1. Test Case: equals_SameBounds_ShouldReturnTrue  
 - Method: equals(Object obj)  
 - Partition: Two Range objects with same bounds  
 - Input: Range(0, 1) compared with Range(0, 1)  
@@ -165,7 +168,7 @@ Significance: Tests above range partition and boundary clamping to upper bound.
 
 Significance: Tests equality equivalence class.
 
-##2. Test Case: equals_DifferentBounds_ShouldReturnFalse  
+2. Test Case: equals_DifferentBounds_ShouldReturnFalse  
 - Method: equals(Object obj)  
 - Partition: Two Range objects with different bounds  
 - Input: Range(0, 1) compared with Range(0, 2)  
@@ -174,7 +177,7 @@ Significance: Tests equality equivalence class.
 
 Significance: Tests inequality equivalence class.
 
-##3. Test Case: equals_NullOrDifferentType_ShouldReturnFalse  
+3. Test Case: equals_NullOrDifferentType_ShouldReturnFalse  
 - Method: equals(Object obj)  
 - Partition: Null object / different type  
 - Input: null and not a range  
@@ -184,7 +187,8 @@ Significance: Tests inequality equivalence class.
 Significance: Tests robustness partition for invalid comparisons.
 
 ## 9. expand(Range range, double lowerMargin, double upperMargin): Range
-##1. Test Case: expand_PositiveMargins_ShouldExpandBothSides  
+
+1. Test Case: expand_PositiveMargins_ShouldExpandBothSides  
 - Method: expand(Range range, double lowerMargin, double upperMargin)  
 - Partition: Valid range with positive margins  
 - Input: base = [0, 10], lowerMargin = 0.1, upperMargin = 0.2  
@@ -193,7 +197,7 @@ Significance: Tests robustness partition for invalid comparisons.
 
 Significance: Tests margin based expansion using normal valid partitions.
 
-##2. Test Case: expand_ZeroMargins_ShouldReturnSameBounds  
+2. Test Case: expand_ZeroMargins_ShouldReturnSameBounds  
 - Method: expand(Range range, double lowerMargin, double upperMargin)  
 - Partition: Zero margins (boundary case)  
 - Input: base = [0, 10], lowerMargin = 0.0, upperMargin = 0.0  
@@ -202,9 +206,18 @@ Significance: Tests margin based expansion using normal valid partitions.
 
 Significance: Tests boundary case where margins shouldnt cause change.
 
+3. Test Case: expand_NullRange_ShouldThrowInvalidParameterException
+- Method: expand(Range range, double lowerMargin, double upperMargin)
+- Partition: Null range object
+- Input: range = null, lowerMargin = 0.1, upperMargin = 0.2
+- Expected: InvalidParameterException
+- Result: DID NOT PASS
+
+Significance: Tests exception handling partition for null range input.
+
 ## 10. expandToInclude(Range range, double value): Range
 
-##1. Test Case: expandToInclude_NullRange_ShouldCreateSinglePointRange  
+1. Test Case: expandToInclude_NullRange_ShouldCreateSinglePointRange  
 - Method: expandToInclude(Range range, double value)  
 - Partition: Null range input  
 - Input: range = null, value = 5  
@@ -213,16 +226,16 @@ Significance: Tests boundary case where margins shouldnt cause change.
 
 Significance: Tests null handling partition and creation behavior.
 
-##2. Test Case: expandToInclude_ValueInside_ShouldReturnUnchanged  
+2. Test Case: expandToInclude_ValueInside_ShouldReturnUnchanged  
 - Method: expandToInclude(Range range, double value)  
 - Partition: Value inside existing range  
 - Input: base = [0, 10], value = 5  
 - Expected: [0, 10]  
 - Result: DID NOT PASS  
 
-Significance: Tests inside range equivalence class (no expansion required).
+Significance: Tests inside range equivalence class.
 
-##3. Test Case: expandToInclude_ValueBelowLower_ShouldExpandLower  
+3. Test Case: expandToInclude_ValueBelowLower_ShouldExpandLower  
 - Method: expandToInclude(Range range, double value)  
 - Partition: Value below lower bound  
 - Input: base = [0, 10], value = -2  
@@ -231,7 +244,7 @@ Significance: Tests inside range equivalence class (no expansion required).
 
 Significance: Tests lower bound expansion partition.
 
-##4. Test Case: expandToInclude_ValueAboveUpper_ShouldExpandUpper  
+4. Test Case: expandToInclude_ValueAboveUpper_ShouldExpandUpper  
 - Method: expandToInclude(Range range, double value)  
 - Partition: Value above upper bound  
 - Input: base = [0, 10], value = 12  
@@ -239,6 +252,8 @@ Significance: Tests lower bound expansion partition.
 - Result: DID NOT PASS  
 
 Significance: Tests upper bound expansion partition.
+
+
 
 
 
