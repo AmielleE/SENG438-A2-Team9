@@ -368,17 +368,21 @@ Tests correct conversion of a valid 2D array into a 2D Number array.
 
 # 4 How the team work/effort was divided and managed
 
-Text…
+Pair 1: Fatma & Amielle
+Fatma & Amielle focused on the Range class, where they designed equivalence classes and boundary value partitions and implemented tests for methods such as contains(), combine(), constrain(), expand(), expandToInclude(), and equals(), with emphasis on boundary analysis, robustness testing (including null inputs), and identifying defects through failing tests.
 
-# 5 Difficulties encountered, challenges overcome, and lessons learned
+Pair 2: Josral, Faris & Erioluwa
+Josral, Faris & Erioluwa focused on the DataUtilities class, where they designed and implemented tests using Mockito for methods involving Values2D, including calculateColumnTotal() (both overloads), calculateRowTotal(), createNumberArray(), and createNumberArray2D(), ensuring coverage of normal, boundary, and exception partitions with consistent naming and structure.
+The report was created by all 5 members of the group, with each person taking one section to complete, and Josral being the only one to complete more than one.
 
-One major difficulty was ensuring that all partitions and strategy components interacted correctly without unintended side effects. Some unit tests initially passed in isolation but failed during integration due to incorrect assumptions in the mocked behavior.
-Another challenge involved designing effective test cases that covered all logical branches. Edge cases, especially around boundary conditions, required careful thought and refinement.
-We also encountered minor version control conflicts when merging branches, which highlighted the importance of frequent commits and communication.
+Josral, Faris & Erioluwa sequentially checked through and verified each test made by Fatma & Amielle with vice versa also being being the case with the tests created by Josral, Faris & Erioluwa.
+
+
+# 5 Difficulties encountered, challenges overcome, and lessons learned 
+
+One difficulty was interpreting the Javadoc as precise requirements, especially for edge cases like null inputs and boundary behavior. Setting up Mockito correctly for Values2D also required careful configuration and debugging. We overcame this by clearly defining input domains and equivalence classes before writing code. Some failing tests helped us identify real defects in the class rather than errors in our tests. Overall, we learned the importance of strict requirement-based testing and proper test planning.
 
 # 6 Comments/feedback on the lab itself
 
-The lab was effective in reinforcing concepts related to modular design, partitioning strategies, and unit testing. It provided practical exposure to mocking and highlighted the difference between isolated testing and full integration testing.
-One improvement could be clearer examples demonstrating how different partitions relate to strategy design before implementation begins. Additionally, providing a small reference example of effective mocking patterns could reduce confusion for teams unfamiliar with mocking frameworks.
-Overall, the lab was valuable in strengthening both technical skills and teamwork coordination, and it helped bridge theoretical concepts with practical implementation.
-
+This lab was very effective in reinforcing requirement-based black-box testing. Using Javadoc as the source of requirements forced us to carefully read specifications and translate them into equivalence classes, boundary values, and robustness tests instead of relying on the actual implementation. It also helped us understand the importance of writing tests based strictly on expected behavior, especially since some of our tests intentionally failed due to injected defects. The integration of JUnit 5 and Mockito made the experience more realistic and aligned with industry practices, particularly when testing methods that depend on interfaces.
+One challenge was that some Javadoc descriptions were brief or slightly ambiguous, which required interpretation and discussion within the team. Providing one fully worked example of partition derivation in the assignment instructions could help clarify expectations. Additionally, clearer guidance on the expected depth of testing (e.g., worst-case combinations for multi-parameter methods) would improve alignment across groups. Overall, the lab was well-structured and valuable for building practical unit testing skills.
