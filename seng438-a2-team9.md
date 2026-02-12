@@ -372,9 +372,13 @@ Text…
 
 # 5 Difficulties encountered, challenges overcome, and lessons learned
 
-Text…
+One major difficulty was ensuring that all partitions and strategy components interacted correctly without unintended side effects. Some unit tests initially passed in isolation but failed during integration due to incorrect assumptions in the mocked behavior.
+Another challenge involved designing effective test cases that covered all logical branches. Edge cases, especially around boundary conditions, required careful thought and refinement.
+We also encountered minor version control conflicts when merging branches, which highlighted the importance of frequent commits and communication.
 
 # 6 Comments/feedback on the lab itself
 
-Text…
->>>>>>> 08ac0d685495df5fff25f231d59ee343f132e132:seng438-a2-team_number.md
+The lab was effective in reinforcing concepts related to modular design, partitioning strategies, and unit testing. It provided practical exposure to mocking and highlighted the difference between isolated testing and full integration testing.
+One improvement could be clearer examples demonstrating how different partitions relate to strategy design before implementation begins. Additionally, providing a small reference example of effective mocking patterns could reduce confusion for teams unfamiliar with mocking frameworks.
+Overall, the lab was valuable in strengthening both technical skills and teamwork coordination, and it helped bridge theoretical concepts with practical implementation.
+
