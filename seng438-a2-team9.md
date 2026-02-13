@@ -366,6 +366,11 @@ Tests boundary case for invalid (null) input.
 Significance:
 Tests correct conversion of a valid 2D array into a 2D Number array.
 
+
+
+
+Mocking allows us to isolate the unit under test and focus strictly on its internal logic without depending on external implementations. It gives us full control over return values, which makes testing boundary conditions and edge cases much easier. Using mocks also makes tests more predictable and repeatable since they are not affected by outside behavior. This was especially helpful when testing methods that depend on interfaces like Values2D. However, mocked objects are not real implementations, so they may reduce realism in testing. Tests can also become tightly coupled to internal method calls, making them fragile if the implementation changes. Overall, mocking improves isolation and control, but it may hide integration level defects.
+
 # 4 How the team work/effort was divided and managed
 
 Pair 1: Fatma & Amielle
@@ -380,9 +385,9 @@ Josral, Faris & Erioluwa sequentially checked through and verified each test mad
 
 # 5 Difficulties encountered, challenges overcome, and lessons learned 
 
-One difficulty was interpreting the Javadoc as precise requirements, especially for edge cases like null inputs and boundary behavior. Setting up Mockito correctly for Values2D also required careful configuration and debugging. We overcame this by clearly defining input domains and equivalence classes before writing code. Some failing tests helped us identify real defects in the class rather than errors in our tests. Overall, we learned the importance of strict requirement-based testing and proper test planning.
+One difficulty was interpreting the Javadoc as precise requirements, especially for edge cases like null inputs and boundary behavior. Setting up Mockito correctly for Values2D also required careful configuration and debugging. We overcame this by clearly defining input domains and equivalence classes before writing code. Some failing tests helped us identify real defects in the class rather than errors in our tests. Overall, we learned the importance of strict requirement based testing and proper test planning.
 
 # 6 Comments/feedback on the lab itself
 
 This lab was very effective in reinforcing requirement-based black-box testing. Using Javadoc as the source of requirements forced us to carefully read specifications and translate them into equivalence classes, boundary values, and robustness tests instead of relying on the actual implementation. It also helped us understand the importance of writing tests based strictly on expected behavior, especially since some of our tests intentionally failed due to injected defects. The integration of JUnit 5 and Mockito made the experience more realistic and aligned with industry practices, particularly when testing methods that depend on interfaces.
-One challenge was that some Javadoc descriptions were brief or slightly ambiguous, which required interpretation and discussion within the team. Providing one fully worked example of partition derivation in the assignment instructions could help clarify expectations. Additionally, clearer guidance on the expected depth of testing (e.g., worst-case combinations for multi-parameter methods) would improve alignment across groups. Overall, the lab was well-structured and valuable for building practical unit testing skills.
+One challenge was that some Javadoc descriptions were brief or slightly ambiguous, which required interpretation and discussion within the team. Providing one fully worked example of partition derivation in the assignment instructions could help clarify expectations. Additionally, clearer guidance on the expected depth of testing (e.g., worst case combinations for multiparameter methods) would improve alignment across groups. Overall, the lab was well structured and valuable for building practical unit testing skills.
