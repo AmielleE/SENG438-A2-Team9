@@ -38,7 +38,7 @@ Below are the main partitions we designed. Section 3 lists the exact test cases 
 
 # Range class – partitioning strategy
   
-  ### getCentralValue()
+  ## getCentralValue()
 
 Input domain: lowerBound and upperBound are real numbers, with lowerBound ≤ upperBound.
 Partitions (equivalence classes):
@@ -52,7 +52,7 @@ Partitions (equivalence classes):
 Covered by: TC_GETCENTRALVALUE_01 (normal symmetric range partition)
 
 
- ### contains(double value)
+ ## contains(double value)
 
 Input domain: value is any real number.
 Equivalence classes:
@@ -82,7 +82,7 @@ Covered by:
 - testContains_ValueAboveUpperBound_ReturnsFalse (EC5)
 
 
-### getLowerBound() / getUpperBound() / getLength()
+## getLowerBound() / getUpperBound() / getLength()
 
 These methods are simple, but we still treated them as black-box checks based on Javadoc meaning:
 
@@ -100,7 +100,7 @@ Covered by:
 
 - getLength_ShouldReturnCorrectValue()
 
-### combine(Range range1, Range range2)
+## combine(Range range1, Range range2)
 
 Input domain: range1 and range2 may be valid Range objects or null.
 
@@ -125,7 +125,7 @@ Covered by:
 - combine_BothNull_ShouldReturnNull (EC4)
 
 
-### constrain(double value)
+## constrain(double value)
 
 Input domain: value is any real number.
 
@@ -148,7 +148,7 @@ Covered by:
 - constrain_ValueAboveUpper_ShouldReturnUpperBound (EC3, BVA clamp)
 
 
-### equals(Object obj)
+## equals(Object obj)
 
 Input domain: obj can be Range, null, or another type.
 Equivalence classes:
@@ -167,7 +167,7 @@ Covered by:
 
 - equals_NullOrDifferentType_ShouldReturnFalse (EC3)
 
- ### expand(Range range, double lowerMargin, double upperMargin)
+ ## expand(Range range, double lowerMargin, double upperMargin)
 
 Input domain: range can be Range or null; margins are doubles (expected to be ≥ 0 per spec/assumptions).
 
@@ -187,7 +187,7 @@ Covered by:
 
 - expand_NullRange_ShouldThrowInvalidParameterException (EC3)
 
- ### expandToInclude(Range range, double value)
+ ## expandToInclude(Range range, double value)
 
 Input domain: range may be null; value is any real number.
 
@@ -203,7 +203,7 @@ Equivalence classes:
 
 Covered by: the four expandToInclude_... test cases listed in Section 3.
 
- ### intersects(double lower, double upper)
+ ## intersects(double lower, double upper)
 
 Input domain: lower and upper are real numbers.
 
@@ -221,7 +221,7 @@ Equivalence classes:
 
 Covered by: the five intersects_... test cases listed in Section 3.
 
- ### shift(...) and toString()
+ ## shift(...) and toString()
 
 For shift:
 
@@ -240,11 +240,11 @@ Covered by:
 
 - toString_ShouldContainLowerAndUpperBounds
 
- ### DataUtilities class – partitioning strategy (with mocking)
+ ## DataUtilities class – partitioning strategy (with mocking)
 
 Several DataUtilities methods depend on the Values2D interface. Since Values2D is an interface (not a concrete class we can easily instantiate with real data), we used Mockito to mock it. This allowed us to control the row/column counts and returned values precisely, so each test targets a specific partition.
 
-### calculateColumnTotal(Values2D data, int column)
+## calculateColumnTotal(Values2D data, int column)
 
 Equivalence classes:
 
@@ -258,7 +258,7 @@ Covered by:
 
 - testCalculateColumnTotal_NullData_ShouldThrowException (EC2)
 
- ### calculateColumnTotal(Values2D data, int column, int[] validRows)
+ ## calculateColumnTotal(Values2D data, int column, int[] validRows)
 
 Equivalence classes:
 
@@ -268,7 +268,7 @@ Covered by:
 
 - testCalculateColumnTotal_WithValidRows_ShouldSumSelectedRows
 
-### calculateRowTotal(Values2D data, int row)
+## calculateRowTotal(Values2D data, int row)
 
 Equivalence classes:
 
@@ -278,7 +278,7 @@ Covered by:
 
 - testCalculateRowTotal_TwoColumns_ShouldSumValues
 
-### createNumberArray(double[] data) and createNumberArray2D(double[][] data)
+## createNumberArray(double[] data) and createNumberArray2D(double[][] data)
 
 Equivalence classes:
 
@@ -295,7 +295,7 @@ Covered by:
 - testCreateNumberArray2D_Valid2DInput_ShouldReturn2DNumberArray (EC1)
 
 
-Brief Discussion; Benefits and drawbacks about using mocking :
+## Benefits and drawbacks about using mocking
 
 Mocking allows us to isolate the unit under test and focus strictly on its internal logic without depending on external implementations. It gives us full control over return values, which makes testing boundary conditions and edge cases much easier. Using mocks also makes tests more predictable and repeatable since they are not affected by outside behavior. This was especially helpful when testing methods that depend on interfaces like Values2D. However, mocked objects are not real implementations, so they may reduce realism in testing. Tests can also become tightly coupled to internal method calls, making them fragile if the implementation changes. Overall, mocking improves isolation and control, but it may hide integration level defects.
 
