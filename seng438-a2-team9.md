@@ -294,6 +294,11 @@ Covered by:
 
 - testCreateNumberArray2D_Valid2DInput_ShouldReturn2DNumberArray (EC1)
 
+
+Brief Discussion; Benefits and drawbacks about using mocking :
+
+Mocking allows us to isolate the unit under test and focus strictly on its internal logic without depending on external implementations. It gives us full control over return values, which makes testing boundary conditions and edge cases much easier. Using mocks also makes tests more predictable and repeatable since they are not affected by outside behavior. This was especially helpful when testing methods that depend on interfaces like Values2D. However, mocked objects are not real implementations, so they may reduce realism in testing. Tests can also become tightly coupled to internal method calls, making them fragile if the implementation changes. Overall, mocking improves isolation and control, but it may hide integration level defects.
+
 # 3 Test cases developed
 
 Text…
@@ -740,10 +745,6 @@ Tests boundary case for invalid (null) input.
 Significance:
 Tests correct conversion of a valid 2D array into a 2D Number array.
 
-
-
-
-Mocking allows us to isolate the unit under test and focus strictly on its internal logic without depending on external implementations. It gives us full control over return values, which makes testing boundary conditions and edge cases much easier. Using mocks also makes tests more predictable and repeatable since they are not affected by outside behavior. This was especially helpful when testing methods that depend on interfaces like Values2D. However, mocked objects are not real implementations, so they may reduce realism in testing. Tests can also become tightly coupled to internal method calls, making them fragile if the implementation changes. Overall, mocking improves isolation and control, but it may hide integration level defects.
 
 # 4 How the team work/effort was divided and managed
 
