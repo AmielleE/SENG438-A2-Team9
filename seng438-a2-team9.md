@@ -370,38 +370,38 @@ Significance: Tests values above the valid range (Equivalence Class 5)
 ## 6. combine(Range range1, Range range2): Range
 
 1. Test Case: combine_TwoNonNullRanges_ShouldReturnMinLowerMaxUpper
--Method: combine(Range, Range)
--Partition: Two valid non null overlapping ranges
--Input: range1 = [0,5], range2 = [3,10]
--Expected: Combined range should be [0,10]
--Result: DID NOT PASS
+- Method: combine(Range, Range)
+- Partition: Two valid non null overlapping ranges
+- Input: range1 = [0,5], range2 = [3,10]
+- Expected: Combined range should be [0,10]
+- Result: DID NOT PASS
 
 Significance: Tests normal valid input partition; reveals defect (exception/incorrect bounds) for valid overlapping ranges.
 
 2. Test Case: combine_FirstNull_ShouldReturnSecond
--Method: combine(Range, Range)
--Partition: First range is null
--Input: range1 = null, range2 = [1,2]
--Expected: Should return [1,2]
--Result: DID NOT PASS
+- Method: combine(Range, Range)
+- Partition: First range is null
+- Input: range1 = null, range2 = [1,2]
+- Expected: Should return [1,2]
+- Result: DID NOT PASS
 
 3.Significance: Tests null handling partition for first parameter.
 
 Test Case: combine_SecondNull_ShouldReturnFirst
--Method: combine(Range, Range)
--Partition: Second range is null
--Input: range1 = [-2,4], range2 = null
--Expected: Should return [-2,4]
--Result: DID NOT PASS
+- Method: combine(Range, Range)
+- Partition: Second range is null
+- Input: range1 = [-2,4], range2 = null
+- Expected: Should return [-2,4]
+- Result: DID NOT PASS
 
 Significance: Tests null handling partition for second parameter.
 
 4.Test Case: combine_BothNull_ShouldReturnNull
--Method: combine(Range, Range)
--Partition: Both inputs null
--Input: range1 = null, range2 = null
--Expected: Should return null
--Result: PASSED
+- Method: combine(Range, Range)
+- Partition: Both inputs null
+- Input: range1 = null, range2 = null
+- Expected: Should return null
+- Result: PASSED
 
 Significance: Tests boundary case when both parameters are null.
 
@@ -533,100 +533,100 @@ Significance: Tests upper bound expansion partition.
 ## 11. hashCode(): int
 
 1. Test Case: hashCode_EqualObjects_ShouldHaveSameHashCode
--Method: hashCode()
--Partition: Equal objects (same bounds)
--Input: Range(0, 1) and Range(0, 1)
--Expected: Same hash code for equivelant objects
--Result: DID NOT PASS
+- Method: hashCode()
+- Partition: Equal objects (same bounds)
+- Input: Range(0, 1) and Range(0, 1)
+- Expected: Same hash code for equivelant objects
+- Result: DID NOT PASS
 
 Significance: Tests hashCode and equals contract requirement partition.
 
 ## 12. intersects(double lower, double upper): boolean
 
 1. Test Case: intersects_DisjointLeft_ShouldReturnFalse
--Method: intersects(double lower, double upper)
--Partition: Interval completely left of range
--Input: range = [0, 10], test interval = [-5, -1]
--Expected: false
--Result: DID NOT PASS
+- Method: intersects(double lower, double upper)
+- Partition: Interval completely left of range
+- Input: range = [0, 10], test interval = [-5, -1]
+- Expected: false
+- Result: DID NOT PASS
 
 Significance: Tests disjoint left equivalence class.
 
 2. Test Case: intersects_DisjointRight_ShouldReturnFalse
--Method: intersects(double lower, double upper)
--Partition: Interval completely right of range
--Input: range = [0, 10], test interval = [11, 20]
--Expected: false
--Result: Passed
+- Method: intersects(double lower, double upper)
+- Partition: Interval completely right of range
+- Input: range = [0, 10], test interval = [11, 20]
+- Expected: false
+- Result: Passed
 
 Significance: Tests disjoint right equivalence class.
 
 3. Test Case: intersects_Overlapping_ShouldReturnTrue
--Method: intersects(double lower, double upper)
--Partition: Partially overlapping interval
--Input: range = [0, 10], test interval = [5, 15]
--Expected: true
--Result: DID NOT PASS
+- Method: intersects(double lower, double upper)
+- Partition: Partially overlapping interval
+- Input: range = [0, 10], test interval = [5, 15]
+- Expected: true
+- Result: DID NOT PASS
 
 Significance: Tests overlap equivalence class.
 
 4. Test Case: intersects_ContainedInterval_ShouldReturnTrue
--Method: intersects(double lower, double upper)
--Partition: Interval fully contained within range
--Input: range = [0, 10], test interval = [2, 3]
--Expected: true
--Result: Passed
+- Method: intersects(double lower, double upper)
+- Partition: Interval fully contained within range
+- Input: range = [0, 10], test interval = [2, 3]
+- Expected: true
+- Result: Passed
 
 Significance: Tests contained interval equivalence class.
 
 5. Test Case: intersects_InvalidIntervalLowerGreaterThanUpper_ShouldReturnFalse
--Method: intersects(double lower, double upper)
--Partition: Invalid interval (lower > upper)
--Input: range = [0, 10], test interval = [5, 4]
--Expected: false
--Result: Passed
+- Method: intersects(double lower, double upper)
+- Partition: Invalid interval (lower > upper)
+- Input: range = [0, 10], test interval = [5, 4]
+- Expected: false
+- Result: Passed
 
 Significance: Tests invalid input robustness partition.
 
 ## 13. shift(Range base, double delta): Range
 
 1. Test Case: shift_TwoArg_ShouldMoveBothBoundsByDelta
--Method: shift(Range base, double delta)
--Partition: Normal shift with positive delta
--Input: base = [1, 3], delta = 2
--Expected: [3, 5]
--Result: DID NOT PASS
+- Method: shift(Range base, double delta)
+- Partition: Normal shift with positive delta
+- Input: base = [1, 3], delta = 2
+- Expected: [3, 5]
+- Result: DID NOT PASS
 
 Significance: Tests normal equivalence class for shifting both bounds.
 
 ## 14. shift(Range base, double delta, boolean allowZeroCrossing): Range
 
 1. Test Case: shift_AllowZeroCrossingTrue_ShouldCrossZeroNormally
--Method: shift(Range base, double delta, boolean allowZeroCrossing)
--Partition: allowZeroCrossing = true
--Input: base = [-1, 1], delta = 2
--Expected: [1, 3]
--Result: DID NOT PASS
+- Method: shift(Range base, double delta, boolean allowZeroCrossing)
+- Partition: allowZeroCrossing = true
+- Input: base = [-1, 1], delta = 2
+- Expected: [1, 3]
+- Result: DID NOT PASS
 
 Significance: Tests equivalence class where crossing zero is allowed.
 
 2. Test Case: shift_AllowZeroCrossingFalse_ShouldNotCrossZero
--Method: shift(Range base, double delta, boolean allowZeroCrossing)
--Partition: allowZeroCrossing = false (zero crossing constraint)
--Input: base = [-1, 1], delta = 2
--Expected: Lower bound should not be negative after shift
--Result: DID NOT PASS
+- Method: shift(Range base, double delta, boolean allowZeroCrossing)
+- Partition: allowZeroCrossing = false (zero crossing constraint)
+- Input: base = [-1, 1], delta = 2
+- Expected: Lower bound should not be negative after shift
+- Result: DID NOT PASS
 
 Significance: Tests boundary and constraint partition when zero crossing is disallowed.
 
 ## 15. toString(): String
 
 1. Test Case: toString_ShouldContainLowerAndUpperBounds
--Method: toString()
--Partition: Normal string representation
--Input: range = [-1, 1]
--Expected: Output should contain -1 and 1
--Result: DID NOT PASS
+- Method: toString()
+- Partition: Normal string representation
+- Input: range = [-1, 1]
+- Expected: Output should contain -1 and 1
+- Result: DID NOT PASS
 
 Significance: Tests that string representation includes both bounds.
 
