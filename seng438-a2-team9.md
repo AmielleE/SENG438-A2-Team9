@@ -301,18 +301,13 @@ Mocking allows us to isolate the unit under test and focus strictly on its inter
 
 # 3 Test cases developed
 
-Text…
-
-// write down the name of the test methods and classes. Organize the based on
-the source code method // they test. identify which tests cover which partitions
-you have explained in the test strategy section //above
 # Range Test.java
 ## 1.getCentralValue(): boolean
-     - Test Case: TC_GETCENTRALVALUE_01
-     - Method: getCentralValue()
-     - Partition: Normal symmetric range [-1, 1]
-     - Expected: Central value should be 0
-     - Result: Passed
+   - Test Case: TC_GETCENTRALVALUE_01
+   - Method: getCentralValue()
+   - Partition: Normal symmetric range [-1, 1]
+   - Expected: Central value should be 0
+   - Result: Passed
 ## 2. contains(double): boolean
 1. Test Case: testContains_ValueInsideRange_ReturnsTrue
 - Method: contains(double value)
