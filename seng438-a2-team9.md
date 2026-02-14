@@ -11,11 +11,288 @@
 
 # 1 Introduction
 
-Text…
+This lab focused on developing a unit test suite using a requirements-based black-box approach. We designed JUnit 5 tests for selected methods in org.jfree.data.Range and org.jfree.data.DataUtilities, using the Javadoc specifications as our source of requirements rather than the implementation itself.
+
+To systematically design our tests, we applied Equivalence Class Partitioning (ECP) and Boundary Value Analysis (BVA) to cover normal behavior, edge cases, and invalid inputs. For methods that depended on the Values2D interface, we used Mockito to mock inputs and isolate the unit under test. The resulting test suite was then executed to identify both correct behavior and injected defects.
 
 # 2 Detailed description of unit test strategy
 
-// including the input partitions you have designed
+Our team used a requirements-based (black-box) unit testing strategy. We designed tests strictly from the Javadoc specifications for org.jfree.data.Range and org.jfree.data.DataUtilities. We did not use the implementation code to decide expected results. Instead, we treated the Javadoc as the requirements and built tests to check whether the methods behave as specified.
+
+To keep our approach consistent across methods, we followed the same steps:
+
+1. Identify input domains for each parameter (e.g., real numbers for bounds/values, nullable objects, array inputs, row/column indexes).
+
+2. Split each input domain into equivalence classes:
+
+   - Valid equivalence classes (inputs that should work normally)
+
+   - Invalid equivalence classes (inputs that should return false, clamp, return null, or throw an exception depending on the spec)
+
+3. Apply Boundary Value Analysis (BVA) whenever boundaries matter (e.g., exact lower bound, exact upper bound, zero margins, and “just outside” conditions).
+
+4. Create at least one test per partition and clearly name tests so the purpose is obvious.
+
+
+Below are the main partitions we designed. Section 3 lists the exact test cases we implemented for each method and shows which partition each one covers.
+
+# Range class – partitioning strategy
+  
+  ### getCentralValue()
+
+Input domain: lowerBound and upperBound are real numbers, with lowerBound ≤ upperBound.
+Partitions (equivalence classes):
+
+- Typical valid range (e.g., symmetric range like [-1, 1])
+
+- (Possible edge class) zero-length range where lowerBound = upperBound
+
+- Negative-only and positive-only ranges (general numeric partitions)
+
+Covered by: TC_GETCENTRALVALUE_01 (normal symmetric range partition)
+
+
+ ### contains(double value)
+
+Input domain: value is any real number.
+Equivalence classes:
+
+- EC1: value < lowerBound
+
+- EC2: value = lowerBound (boundary)
+
+- EC3: lowerBound < value < upperBound
+
+- EC4: value = upperBound (boundary)
+
+- EC5: value > upperBound
+
+Boundary Value Analysis used: we tested values at both bounds and outside both bounds because inclusive boundary behavior is a common defect area.
+
+Covered by:
+
+- testContains_ValueBelowLowerBound_ReturnsFalse (EC1)
+
+- testContains_ValueAtLowerBound_ReturnsTrue (EC2, BVA)
+
+- testContains_ValueInsideRange_ReturnsTrue (EC3)
+
+- testContains_ValueAtUpperBound_ReturnsTrue (EC4, BVA)
+
+- testContains_ValueAboveUpperBound_ReturnsFalse (EC5)
+
+
+### getLowerBound() / getUpperBound() / getLength()
+
+These methods are simple, but we still treated them as black-box checks based on Javadoc meaning:
+
+- getLowerBound() should return the stored lower bound
+
+- getUpperBound() should return the stored upper bound
+
+- getLength() should return (upper − lower)
+
+Covered by:
+
+- getLowerBound_ShouldReturnCorrectValue()
+
+- getUpperBound_ShouldReturnCorrectValue()
+
+- getLength_ShouldReturnCorrectValue()
+
+### combine(Range range1, Range range2)
+
+Input domain: range1 and range2 may be valid Range objects or null.
+
+Equivalence classes:
+
+- EC1: range1 and range2 are both non-null
+
+- EC2: range1 is null, range2 non-null
+
+- EC3: range1 non-null, range2 is null
+
+- EC4: both are null (boundary/robustness)
+
+Covered by:
+
+- combine_TwoNonNullRanges_ShouldReturnMinLowerMaxUpper (EC1)
+
+- combine_FirstNull_ShouldReturnSecond (EC2)
+
+- combine_SecondNull_ShouldReturnFirst (EC3)
+
+- combine_BothNull_ShouldReturnNull (EC4)
+
+
+### constrain(double value)
+
+Input domain: value is any real number.
+
+Equivalence classes:
+
+- EC1: value inside range → returned unchanged
+
+- EC2: value below lowerBound → clamp to lowerBound
+
+- EC3: value above upperBound → clamp to upperBound
+
+BVA focus: outside-bounds values + expected clamping behavior.
+
+Covered by:
+
+- constrain_ValueInsideRange_ShouldReturnSameValue (EC1)
+
+- constrain_ValueBelowLower_ShouldReturnLowerBound (EC2, BVA clamp)
+
+- constrain_ValueAboveUpper_ShouldReturnUpperBound (EC3, BVA clamp)
+
+
+### equals(Object obj)
+
+Input domain: obj can be Range, null, or another type.
+Equivalence classes:
+
+- EC1: Same bounds → true
+
+- EC2: Different bounds → false
+
+- EC3: null or different type → false (robustness)
+
+Covered by:
+
+- equals_SameBounds_ShouldReturnTrue (EC1)
+
+- equals_DifferentBounds_ShouldReturnFalse (EC2)
+
+- equals_NullOrDifferentType_ShouldReturnFalse (EC3)
+
+ ### expand(Range range, double lowerMargin, double upperMargin)
+
+Input domain: range can be Range or null; margins are doubles (expected to be ≥ 0 per spec/assumptions).
+
+Equivalence classes:
+
+- EC1: valid range with positive margins
+
+- EC2: valid range with zero margins (boundary)
+
+- EC3: null range (invalid/exception)
+
+Covered by:
+
+- expand_PositiveMargins_ShouldExpandBothSides (EC1)
+
+- expand_ZeroMargins_ShouldReturnSameBounds (EC2, BVA)
+
+- expand_NullRange_ShouldThrowInvalidParameterException (EC3)
+
+ ### expandToInclude(Range range, double value)
+
+Input domain: range may be null; value is any real number.
+
+Equivalence classes:
+
+- EC1: range is null → create [value, value]
+
+- EC2: value inside range → unchanged
+
+- EC3: value below lowerBound → expand lower
+
+- EC4: value above upperBound → expand upper
+
+Covered by: the four expandToInclude_... test cases listed in Section 3.
+
+ ### intersects(double lower, double upper)
+
+Input domain: lower and upper are real numbers.
+
+Equivalence classes:
+
+- EC1: interval completely left of range
+
+- EC2: interval completely right of range
+
+- EC3: partial overlap
+
+- EC4: interval fully contained
+
+- EC5: invalid interval (lower > upper) (robustness)
+
+Covered by: the five intersects_... test cases listed in Section 3.
+
+ ### shift(...) and toString()
+
+For shift:
+
+We partitioned based on allowZeroCrossing = true vs false, and used a normal delta shift case.
+For toString:
+
+We checked that both bounds appear in the string output (black-box “contains expected information” check).
+
+Covered by:
+
+- shift_TwoArg_ShouldMoveBothBoundsByDelta
+
+- shift_AllowZeroCrossingTrue_ShouldCrossZeroNormally
+
+- shift_AllowZeroCrossingFalse_ShouldNotCrossZero
+
+- toString_ShouldContainLowerAndUpperBounds
+
+ ### DataUtilities class – partitioning strategy (with mocking)
+
+Several DataUtilities methods depend on the Values2D interface. Since Values2D is an interface (not a concrete class we can easily instantiate with real data), we used Mockito to mock it. This allowed us to control the row/column counts and returned values precisely, so each test targets a specific partition.
+
+### calculateColumnTotal(Values2D data, int column)
+
+Equivalence classes:
+
+- EC1: valid data + valid column + multiple rows (normal)
+
+- EC2: data = null (invalid input, should throw per requirement)
+
+Covered by:
+
+- testCalculateColumnTotal_TwoRows_ShouldSumValues (EC1)
+
+- testCalculateColumnTotal_NullData_ShouldThrowException (EC2)
+
+ ### calculateColumnTotal(Values2D data, int column, int[] validRows)
+
+Equivalence classes:
+
+- EC1: validRows selects a subset of rows (normal subset-sum behavior)
+
+Covered by:
+
+- testCalculateColumnTotal_WithValidRows_ShouldSumSelectedRows
+
+### calculateRowTotal(Values2D data, int row)
+
+Equivalence classes:
+
+- EC1: valid row + multiple columns (normal)
+
+Covered by:
+
+- testCalculateRowTotal_TwoColumns_ShouldSumValues
+
+### createNumberArray(double[] data) and createNumberArray2D(double[][] data)
+
+Equivalence classes:
+
+- EC1: valid array input → correct conversion output
+
+- EC2: null input → should throw (invalid)
+
+Covered by:
+
+- testCreateNumberArray_ValidInput_ShouldReturnNumberArray (EC1)
+
+- testCreateNumberArray_NullInput_ShouldThrowException (EC2)
+
+- testCreateNumberArray2D_Valid2DInput_ShouldReturn2DNumberArray (EC1)
 
 # 3 Test cases developed
 
